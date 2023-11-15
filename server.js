@@ -1,4 +1,4 @@
-const app = require("./data-api/src/app.js");
+const app = require("./data-api/src/app");
 const http = require("http");
 
 const normalizePort = val => {
