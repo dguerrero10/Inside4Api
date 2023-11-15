@@ -35,13 +35,13 @@ exports.getTransactionsByOwnerAndDates = async (req, res) => {
     let endDateObj = null;
 
     if (!validators.isStartDateValid(startDate)) {
-      return errorResponses.return400Error(res, errorMessages.invalidStartDate);
+      return errorResponses.send400Error(res, errorMessages.invalidStartDate);
     } else {
       startDateObj = new Date(startDate);
     }
 
     if (endDate && !validators.isEndDateValid(endDate)) {
-      return errorResponses.return400Error(res, errorMessages.invalidStartDate);
+      return errorResponses.send400Error(res, errorMessages.invalidStartDate);
     } else {
       endDateObj = endDate ? new Date(endDate) : new Date();
     }
@@ -90,13 +90,13 @@ exports.getTransactionsByOwnerCikAndDates = async (req, res) => {
     let endDateObj = null;
 
     if (!validators.isStartDateValid(startDate)) {
-      return errorResponses.return400Error(res, errorMessages.invalidStartDate);
+      return errorResponses.send400Error(res, errorMessages.invalidStartDate);
     } else {
       startDateObj = new Date(startDate);
     }
 
     if (endDate && !validators.isEndDateValid(endDate)) {
-      return errorResponses.return400Error(res, errorMessages.invalidStartDate);
+      return errorResponses.send400Error(res, errorMessages.invalidStartDate);
     } else {
       endDateObj = endDate ? new Date(endDate) : new Date();
     }
