@@ -5,7 +5,8 @@ module.exports = {
         "ownerCik": "reportingOwner.reportingOwnerId.rptOwnerCik",
         "transactionDate": "nonDerivativeTable.nonDerivativeTransaction.transactionDate",
         "ownerName": "reportingOwner.reportingOwnerId.rptOwnerName",
-        "buyTransactionNonDerivative": "nonDerivativeTable.nonDerivativeTransaction.transactionCoding.transactionCode"
+        "transactionCodeNonDerivative": "nonDerivativeTable.nonDerivativeTransaction.transactionCoding.transactionCode",
+        "ownerRelationship": "reportingOwner.reportingOwnerRelationship.is"
     },
     errorMessages: {
         "invalidEndDate": "End date is invalid. It must be in the format (YYYY-MM-DD) and not greater than today.",

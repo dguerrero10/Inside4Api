@@ -2,7 +2,7 @@ const moment = require("moment");
 
 module.exports = {
   Validators: class Validators {
-    constructor() {}
+    constructor() { }
 
     isStartDateValid(startDate) {
       if (!startDate) return false;
