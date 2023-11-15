@@ -5,7 +5,6 @@ module.exports = {
     constructor() {}
 
     isStartDateValid(startDate) {
-      console.log(startDate)
       if (!startDate) return false;
 
       let currentDateObj = new Date();
@@ -16,7 +15,6 @@ module.exports = {
         console.log(parsedStartDate.isValid())
         return false;
       }
-
       return true;
     }
 
@@ -29,7 +27,6 @@ module.exports = {
       if (!parsedEndDate.isValid() || endDate > currentDate) {
         return false;
       }
-
       return true;
     }
   },
