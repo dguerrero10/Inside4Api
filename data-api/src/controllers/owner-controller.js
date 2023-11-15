@@ -1,56 +1,25 @@
 const FormFourModel = require("../models/form-four");
-const { queryStrings, errorMessages } = require("../utils/constants");
-
-const { Validators } = require("../utils/validators");
-const { ErrorResponses } = require("../helpers/error-responses");
-
-const validators = new Validators();
-const errorResponses = new ErrorResponses();
+const { queryStrings } = require("../utils/constants");
 
 exports.getTransactionsByOwner = async (req, res) => {
   const { name } = req.params;
 
   try {
-    const results = await FormFourModel.find({
+    const baseQuery = {
       [queryStrings.ownerName]: { $regex: new RegExp(name.toUpperCase(), "i") },
-    }).sort({ [queryStrings.transactionDate]: -1 });
+    };
+
+    const queryFields = queryBuilder.buildQuery(baseQuery, req.query, res);
+
+    if (queryFields.hasError) {
+      return queryFields.errorObj;
+    }
+
+    const results = await FormFourModel.find(queryFields.query).sort({
+      [queryStrings.transactionDate]: -1,
+    });
 
     return res.status(200).json({
-      results: results,
-    });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({
-      error: err,
-      message: "Something went wrong. Please try again later.",
-    });
-  }
-};
-
-exports.getTransactionsByOwnerAndDates = async (req, res) => {
-  const { name, startDate, endDate } = req.params;
-
-  try {
-    let startDateObj = null;
-    let endDateObj = null;
-
-    if (!validators.isStartDateValid(startDate)) {
-      return errorResponses.send400Error(res, errorMessages.invalidStartDate);
-    } else {
-      startDateObj = new Date(startDate);
-    }
-
-    if (endDate && !validators.isEndDateValid(endDate)) {
-      return errorResponses.send400Error(res, errorMessages.invalidStartDate);
-    } else {
-      endDateObj = endDate ? new Date(endDate) : new Date();
-    }
-    const results = await FormFourModel.find({
-      [queryStrings.ownerName]: name,
-      [queryStrings.transactionDate]: { $gte: startDateObj, $lte: endDateObj },
-    }).sort({ [queryStrings.transactionDate]: -1 });
-
-    res.status(200).json({
       results: results,
     });
   } catch (err) {
@@ -66,47 +35,21 @@ exports.getTransactionsByOwnerCik = async (req, res) => {
   const { cik } = req.params;
 
   try {
-    const results = await FormFourModel.find({
+    const baseQuery = {
       [queryStrings.ownerCik]: cik,
-    }).sort({ [queryStrings.transactionDate]: -1 });
+    };
+
+    const queryFields = queryBuilder.buildQuery(baseQuery, req.query, res);
+
+    if (queryFields.hasError) {
+      return queryFields.errorObj;
+    }
+
+    const results = await FormFourModel.find(queryFields.query).sort({
+      [queryStrings.transactionDate]: -1,
+    });
 
     return res.status(200).json({
-      results: results,
-    });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({
-      error: err,
-      message: "Something went wrong. Please try again later.",
-    });
-  }
-};
-
-exports.getTransactionsByOwnerCikAndDates = async (req, res) => {
-  const { cik, startDate, endDate } = req.params;
-
-  try {
-    let startDateObj = null;
-    let endDateObj = null;
-
-    if (!validators.isStartDateValid(startDate)) {
-      return errorResponses.send400Error(res, errorMessages.invalidStartDate);
-    } else {
-      startDateObj = new Date(startDate);
-    }
-
-    if (endDate && !validators.isEndDateValid(endDate)) {
-      return errorResponses.send400Error(res, errorMessages.invalidStartDate);
-    } else {
-      endDateObj = endDate ? new Date(endDate) : new Date();
-    }
-
-    const results = await FormFourModel.find({
-      [queryStrings.ownerCik]: cik,
-      [queryStrings.transactionDate]: { $gte: startDateObj, $lte: endDateObj },
-    }).sort({ [queryStrings.transactionDate]: -1 });
-
-    res.status(200).json({
       results: results,
     });
   } catch (err) {
