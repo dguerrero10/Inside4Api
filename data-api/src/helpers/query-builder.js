@@ -17,8 +17,6 @@ module.exports = {
         errorObj: {},
       };
 
-      console.log("Build query obj: ", buildQueryObj);
-
       if (!Object.keys(queryParams)) {
         return buildQueryObj;
       }
@@ -39,7 +37,10 @@ module.exports = {
         }
       }
 
-      if (queryParams.endDate && !validators.isEndDateValid(queryParams.endDate)) {
+      if (
+        queryParams.endDate &&
+        !validators.isEndDateValid(queryParams.endDate)
+      ) {
         buildQueryObj.hasError = true;
         buildQueryObj.errorObj = errorResponses.send400Error(
           res,
@@ -47,7 +48,9 @@ module.exports = {
         );
         return buildQueryObj;
       } else {
-        endDateObj = queryParams.endDate ? new Date(queryParams.endDate) : new Date();
+        endDateObj = queryParams.endDate
+          ? new Date(queryParams.endDate)
+          : new Date();
       }
 
       if (queryParams.startDate) {
@@ -60,6 +63,12 @@ module.exports = {
         buildQueryObj.query[queryStrings.transactionDate] = {
           ...buildQueryObj.query[queryStrings.transactionDate],
           $lte: endDateObj,
+        };
+      }
+
+      if (queryParams.transactionCode) {
+        buildQueryObj.query[queryStrings.buyTransactionNonDerivative] = {
+          $eq: queryParams.transactionCode.toUpperCase(),
         };
       }
 

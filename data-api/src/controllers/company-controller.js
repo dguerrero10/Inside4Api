@@ -21,8 +21,11 @@ exports.getTransactionsByCompanyTicker = async (req, res) => {
       [queryStrings.transactionDate]: -1,
     });
 
+    const numberOfFilings = results && results.length ? results.length : 0;
+
     return res.status(200).json({
-      results: results,
+      numberOfFilings,
+      results
     });
   } catch (err) {
     console.log(err);
@@ -50,8 +53,11 @@ exports.getTransactionsByCompanyCik = async (req, res) => {
       [queryStrings.transactionDate]: -1,
     });
 
+    const numberOfFilings = results && results.length ? results.length : 0;
+
     return res.status(200).json({
-      results: results,
+      numberOfFilings,
+      results
     });
   } catch (err) {
     console.log(err);

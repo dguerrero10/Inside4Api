@@ -1,5 +1,7 @@
 const FormFourModel = require("../models/form-four");
 const { queryStrings } = require("../utils/constants");
+const { QueryBuilder } = require("../helpers/query-builder");
+const queryBuilder = new QueryBuilder();
 
 exports.getTransactionsByOwner = async (req, res) => {
   const { name } = req.params;
@@ -19,8 +21,11 @@ exports.getTransactionsByOwner = async (req, res) => {
       [queryStrings.transactionDate]: -1,
     });
 
+    const numberOfFilings = results && results.length ? results.length : 0;
+
     return res.status(200).json({
-      results: results,
+      numberOfFilings,
+      results
     });
   } catch (err) {
     console.log(err);
@@ -49,8 +54,11 @@ exports.getTransactionsByOwnerCik = async (req, res) => {
       [queryStrings.transactionDate]: -1,
     });
 
+    const numberOfFilings = results && results.length ? results.length : 0;
+
     return res.status(200).json({
-      results: results,
+      numberOfFilings,
+      results
     });
   } catch (err) {
     console.log(err);
