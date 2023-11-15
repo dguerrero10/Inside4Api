@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 
-const FormFourSchema = mongoose.Schema({
+const formFourSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
   schemaVersion: { type: String },
   documentType: { type: Number },
   periodOfReport: { type: Date },
   notSubjectToSection16: { type: Boolean },
   issuer: {
-    issuerCIK: { type: Number },
+    issuerCik: { type: Number },
     issuerName: { type: String },
-    issuerTradingSymbol: { type: Number },
+    issuerTradingSymbol: { type: String },
   },
   reportingOwner: {
     reportingOwnerId: {
@@ -129,4 +129,4 @@ const FormFourSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("FormFour", FormFourSchema);
+module.exports = mongoose.model("FormFour", formFourSchema, "formFours");
