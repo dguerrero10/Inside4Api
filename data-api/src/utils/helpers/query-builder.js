@@ -55,14 +55,14 @@ module.exports = {
       }
 
       if (queryParams.relationship) {
-        let relationship = null;
+        let standardizedRelationshipStr = null;
 
         if (queryParams.relationship.toLowerCase() === "tenpercentowner") {
-          relationship = "TenPercentOwner";
+          standardizedRelationshipStr = "TenPercentOwner";
         } else {
-          relationship = capitalizeFirstLetter(queryParams.relationship);
+          standardizedRelationshipStr = capitalizeFirstLetter(queryParams.relationship);
         }
-        buildQueryObj.query[queryStrings.ownerRelationship + relationship.trim()] = {
+        buildQueryObj.query[queryStrings.ownerRelationship + standardizedRelationshipStr.trim()] = {
           $eq: true
         }
       }
