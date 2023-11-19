@@ -7,21 +7,28 @@ const { capitalizeFirstLetter } = require("./generic-helpers");
 const validators = new Validators();
 const errorResponses = new ErrorResponses();
 
+
 module.exports = {
   QueryBuilder: class QueryBuilder {
     constructor() { }
 
     buildQuery(baseQuery, queryParams, res) {
-      const buildQueryObj = {
+      console.log(queryParams)
+      let buildQueryObj = {
         query: baseQuery,
         hasError: false,
         errorObj: {},
       };
-
+    
       if (!queryParams || !Object.keys(queryParams)) {
         return buildQueryObj;
       }
+    
+      let startDateObj = null;
+      let endDateObj = null;
 
+      const conditions = [];
+    
       if (queryParams.startDate) {
         if (!validators.isStartDateValid(queryParams.startDate)) {
           buildQueryObj.hasError = true;
@@ -31,43 +38,77 @@ module.exports = {
           );
           return buildQueryObj;
         } else {
-          buildQueryObj.query[queryStrings.transactionDate] = {
-            $gte: new Date(queryParams.startDate)
-          };
+          startDateObj = new Date(queryParams.startDate);
+          conditions.push({
+            [queryStrings.transactionDate]: {
+              $gte: startDateObj.toISOString(),
+            },
+          });
         }
       }
-
+    
       if (queryParams.endDate && !validators.isEndDateValid(queryParams.endDate)) {
         buildQueryObj.hasError = true;
-        buildQueryObj.errorObj = errorResponses.send400Error(res, errorMessages.invalidEndDate);
+        buildQueryObj.errorObj = errorResponses.send400Error(
+          res,
+          errorMessages.invalidEndDate
+        );
         return buildQueryObj;
       } else {
-        buildQueryObj.query[queryStrings.transactionDate] = {
-          ...buildQueryObj.query[queryStrings.transactionDate],
-          $lte: queryParams.endDate ? new Date(queryParams.endDate) : new Date()
-        };
+        endDateObj = queryParams.endDate ? new Date(queryParams.endDate) : new Date();
+        conditions.push({
+          [queryStrings.transactionDate]: {
+            $lte: endDateObj.toISOString(),
+          },
+        });
       }
 
+      if (conditions.length === 2 && startDateObj > endDateObj) {
+        buildQueryObj.hasError = true;
+        buildQueryObj.errorObj = errorResponses.send400Error(
+          res,
+          errorMessages.startDateGreaterThanEndDate
+        );
+        return buildQueryObj;
+      }
+    
       if (queryParams.transactionCode) {
-        buildQueryObj.query[queryStrings.transactionCodeNonDerivative] = {
-          $eq: queryParams.transactionCode.toUpperCase(),
-        };
+        conditions.push({
+          [queryStrings.transactionCodeNonDerivative]: {
+            $eq: queryParams.transactionCode.toUpperCase(),
+          },
+        });
       }
-
+    
       if (queryParams.relationship) {
         let standardizedRelationshipStr = null;
-
+    
         if (queryParams.relationship.toLowerCase() === "tenpercentowner") {
           standardizedRelationshipStr = "TenPercentOwner";
         } else {
           standardizedRelationshipStr = capitalizeFirstLetter(queryParams.relationship);
         }
-        buildQueryObj.query[queryStrings.ownerRelationship + standardizedRelationshipStr.trim()] = {
-          $eq: true
-        }
+    
+        conditions.push({
+          [queryStrings.ownerRelationship + standardizedRelationshipStr.trim()]: {
+            $eq: true,
+          },
+        });
       }
-
+    
+      if (queryParams.transactionShares) {
+        conditions.push({
+          [queryStrings.transactionSharesNonDerivative]: {
+            $gte: parseInt(queryParams.transactionShares),
+          },
+        });
+      }
+    
+      if (conditions.length > 0) {
+        buildQueryObj.query.$and = conditions;
+      }
+      console.log(conditions)
       return buildQueryObj;
-    }
+    }    
   },
 };

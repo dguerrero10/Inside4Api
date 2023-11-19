@@ -17,6 +17,8 @@ exports.getTransactionsByCompanyTicker = async (req, res) => {
       return queryFields.errorObj;
     }
 
+    console.log("queryFields", queryFields);
+
     const results = await FormFourModel.find(queryFields.query).sort({
       [queryStrings.transactionDate]: -1,
     });
