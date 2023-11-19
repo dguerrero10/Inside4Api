@@ -1,0 +1,268 @@
+{
+  "exampleDocuments": [
+    {
+      "exampledoc1": {
+        "_id": { "$oid": "63e40b6d5050f82f7d58c77d" },
+        "schemaVersion": "X0306",
+        "documentType": { "$numberInt": "4" },
+        "periodOfReport": "2023-01-03",
+        "issuer": {
+          "issuerCik": { "$numberInt": "1459417" },
+          "issuerName": "2U, Inc.",
+          "issuerTradingSymbol": "TWOU"
+        },
+        "reportingOwner": {
+          "reportingOwnerId": {
+            "rptOwnerCik": { "$numberInt": "1453878" },
+            "rptOwnerName": "Lalljie Paul S"
+          },
+          "reportingOwnerAddress": {
+            "rptOwnerStreet1": "C/O 2U, INC.",
+            "rptOwnerStreet2": "7900 HARKINS ROAD",
+            "rptOwnerCity": "LANHAM",
+            "rptOwnerState": "MD",
+            "rptOwnerZipCode": { "$numberInt": "20706" },
+            "rptOwnerStateDescription": ""
+          },
+          "reportingOwnerRelationship": {
+            "isDirector": false,
+            "isOfficer": true,
+            "isTenPercentOwner": false,
+            "isOther": false,
+            "officerTitle": "CHIEF FINANCIAL OFFICER",
+            "otherText": ""
+          }
+        },
+        "nonDerivativeTable": {
+          "nonDerivativeTransaction": {
+            "securityTitle": { "value": "Common Stock" },
+            "transactionDate": {
+              "value": { "$date": { "$numberLong": "1672704000000" } }
+            },
+            "transactionCoding": {
+              "transactionFormType": { "$numberInt": "4" },
+              "transactionCode": "F",
+              "equitySwapInvolved": { "$numberInt": "0" }
+            },
+            "transactionAmounts": {
+              "transactionShares": { "value": { "$numberInt": "13533" } },
+              "transactionPricePerShare": {
+                "value": { "$numberDouble": "6.31" }
+              },
+              "transactionAcquiredDisposedCode": { "value": "D" }
+            },
+            "postTransactionAmounts": {
+              "sharesOwnedFollowingTransaction": {
+                "value": { "$numberInt": "450723" }
+              }
+            },
+            "ownershipNature": {
+              "directOrIndirectOwnership": { "value": "D" },
+              "natureOfOwnership": { "value": "" }
+            }
+          }
+        },
+        "derivativeTable": "",
+        "footnotes": "",
+        "ownerSignature": {
+          "signatureName": "/s/ Matthew J. Norden, attorney-in-fact",
+          "signatureDate": "2023-01-04"
+        }
+      },
+      "exampledoc2": {
+        "_id": { "$oid": "63e40bb05050f82f7d58c7b7" },
+        "schemaVersion": "X0306",
+        "documentType": { "$numberInt": "4" },
+        "periodOfReport": "2023-01-18",
+        "issuer": {
+          "issuerCik": { "$numberInt": "315858" },
+          "issuerName": "Bluegreen Vacations Holding Corp",
+          "issuerTradingSymbol": "BVH"
+        },
+        "reportingOwner": {
+          "reportingOwnerId": {
+            "rptOwnerCik": { "$numberInt": "1199936" },
+            "rptOwnerName": "ABDO JOHN E"
+          },
+          "reportingOwnerAddress": {
+            "rptOwnerStreet1": "4960 CONFERENCE WAY NORTH, SUITE 100",
+            "rptOwnerStreet2": "",
+            "rptOwnerCity": "BOCA RATON",
+            "rptOwnerState": "FL",
+            "rptOwnerZipCode": { "$numberInt": "33431" },
+            "rptOwnerStateDescription": ""
+          },
+          "reportingOwnerRelationship": {
+            "isDirector": { "$numberInt": "1" },
+            "isOfficer": { "$numberInt": "1" },
+            "isTenPercentOwner": { "$numberInt": "1" },
+            "isOther": { "$numberInt": "0" },
+            "officerTitle": "Vice Chairman"
+          }
+        },
+        "nonDerivativeTable": {
+          "nonDerivativeTransaction": {
+            "securityTitle": {
+              "value": "Class A Common Stock, par value $0.01 per share"
+            },
+            "transactionDate": { "value": "2023-01-18" },
+            "deemedExecutionDate": "",
+            "transactionCoding": {
+              "transactionFormType": { "$numberInt": "4" },
+              "transactionCode": "A",
+              "equitySwapInvolved": { "$numberInt": "0" }
+            },
+            "transactionTimeliness": { "value": "" },
+            "transactionAmounts": {
+              "transactionShares": {
+                "value": { "$numberInt": "65911" },
+                "footnoteId": ""
+              },
+              "transactionPricePerShare": { "value": { "$numberInt": "0" } },
+              "transactionAcquiredDisposedCode": { "value": "A" }
+            },
+            "postTransactionAmounts": {
+              "sharesOwnedFollowingTransaction": {
+                "value": { "$numberInt": "184980" },
+                "footnoteId": ""
+              }
+            },
+            "ownershipNature": { "directOrIndirectOwnership": { "value": "D" } }
+          },
+          "nonDerivativeHolding": [
+            {
+              "securityTitle": {
+                "value": "Class A Common Stock, par value $0.01 per share"
+              },
+              "postTransactionAmounts": {
+                "sharesOwnedFollowingTransaction": {
+                  "value": { "$numberInt": "1134465" },
+                  "footnoteId": ""
+                }
+              },
+              "ownershipNature": {
+                "directOrIndirectOwnership": { "value": "I" },
+                "natureOfOwnership": {
+                  "value": "By John E. Abdo Trust Agreement dated 3/15/76, John E. Abdo, Trustee"
+                }
+              }
+            },
+            {
+              "securityTitle": {
+                "value": "Class B Common Stock, par value $0.01 per share"
+              },
+              "postTransactionAmounts": {
+                "sharesOwnedFollowingTransaction": {
+                  "value": { "$numberInt": "1495311" },
+                  "footnoteId": ""
+                }
+              },
+              "ownershipNature": {
+                "directOrIndirectOwnership": { "value": "I" },
+                "natureOfOwnership": {
+                  "value": "By John E. Abdo Trust Agreement dated 3/15/76, John E. Abdo, Trustee"
+                }
+              }
+            },
+            {
+              "securityTitle": {
+                "value": "Class A Common Stock, par value $0.01 per share"
+              },
+              "postTransactionAmounts": {
+                "sharesOwnedFollowingTransaction": {
+                  "value": { "$numberInt": "10742" },
+                  "footnoteId": ""
+                }
+              },
+              "ownershipNature": {
+                "directOrIndirectOwnership": { "value": "I" },
+                "natureOfOwnership": { "value": "By IRA" }
+              }
+            }
+          ]
+        },
+        "footnotes": {
+          "footnote": [
+            "Shares of the issuer's Class B Common Stock are convertible on a share-for-share basis into the issuer's Class A Common Stock at any time in the holder's discretion.",
+            "Represents shares of restricted stock granted by the issuer to the reporting person under the issuer's 2021 Incentive Plan. 50,911 shares are scheduled to vest in four equal annual installments beginning on January 17, 2024, and 15,000 shares are scheduled to cliff vest on January 17, 2027."
+          ]
+        },
+        "ownerSignature": {
+          "signatureName": "/s/ Adrienne Kelley, Senior Vice President Bluegreen Vacations Holding Corporation, Attorney-in-fact for John E. Abdo",
+          "signatureDate": "2023-01-20"
+        }
+      },
+      "exampledoc3": {
+        "_id": { "$oid": "63e40c255050f82f7d58c7fc" },
+        "schemaVersion": "X0306",
+        "documentType": { "$numberInt": "4" },
+        "periodOfReport": "2023-01-03",
+        "issuer": {
+          "issuerCik": { "$numberInt": "1138723" },
+          "issuerName": "ACCURAY INC",
+          "issuerTradingSymbol": "ARAY"
+        },
+        "reportingOwner": {
+          "reportingOwnerId": {
+            "rptOwnerCik": { "$numberInt": "1927594" },
+            "rptOwnerName": "Pervaiz Ali"
+          },
+          "reportingOwnerAddress": {
+            "rptOwnerStreet1": "1310 CHESAPEAKE TERRACE",
+            "rptOwnerStreet2": "",
+            "rptOwnerCity": "SUNNYVALE",
+            "rptOwnerState": "CA",
+            "rptOwnerZipCode": { "$numberInt": "94089" },
+            "rptOwnerStateDescription": ""
+          },
+          "reportingOwnerRelationship": {
+            "isDirector": false,
+            "isOfficer": true,
+            "isTenPercentOwner": false,
+            "isOther": false,
+            "officerTitle": "SVP Chief Financial Officer",
+            "otherText": ""
+          }
+        },
+        "nonDerivativeTable": {
+          "nonDerivativeTransaction": {
+            "securityTitle": { "value": "Common Stock" },
+            "transactionDate": { "value": "2023-01-04" },
+            "deemedExecutionDate": "",
+            "transactionCoding": {
+              "transactionFormType": { "$numberInt": "4" },
+              "transactionCode": "S",
+              "equitySwapInvolved": false
+            },
+            "transactionTimeliness": "",
+            "transactionAmounts": {
+              "transactionShares": {
+                "value": { "$numberInt": "2053" },
+                "footnoteId": ""
+              },
+              "transactionPricePerShare": {
+                "value": { "$numberDouble": "2.06" }
+              },
+              "transactionAcquiredDisposedCode": { "value": "D" }
+            },
+            "postTransactionAmounts": {
+              "sharesOwnedFollowingTransaction": {
+                "value": { "$numberInt": "408492" }
+              }
+            },
+            "ownershipNature": { "directOrIndirectOwnership": { "value": "D" } }
+          }
+        },
+        "derivativeTable": "",
+        "footnotes": {
+          "footnote": "Shares were automatically sold in accordance with Accuray policy for all restricted stock unit (RSU) releases in order to cover tax obligations upon RSU release and is consistent with Accuray practices for all RSU releases of employees located in the United States."
+        },
+        "remarks": "",
+        "ownerSignature": {
+          "signatureName": "/s/ Martha Refugio, Attorney-in-fact for Ali Pervaiz",
+          "signatureDate": "2023-01-05"
+        }
+      }
+    }
+  ]
+}
