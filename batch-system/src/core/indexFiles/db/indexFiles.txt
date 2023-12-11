@@ -1,0 +1,4 @@
+//This file contains saved data of index files processedDownloading Index Files, Failed to download index file for 2009, QTR1, FAILED , Failed to download S3 file, 11-12-2023 11:49 
+Downloading Index Files, Successfully stored file with url: https://www.sec.gov/Archives/edgar/full-index/2009/QTR2/form.idx, SUCCEEDED , , 11-12-2023 12:14 
+Downloading Index Files, Successfully stored file with url: https://www.sec.gov/Archives/edgar/full-index/2009/QTR3/form.idx, SUCCEEDED , , 11-12-2023 12:14 
+Downloading Index Files, Successfully stored file with url: https://www.sec.gov/Archives/edgar/full-index/2009/QTR4/form.idx, SUCCEEDED , , 11-12-2023 12:14 

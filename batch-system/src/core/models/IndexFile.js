@@ -1,6 +1,7 @@
 const { AWSClient } = require("../../util/AWSClient");
 const { Constants } = require("../../util/constants");
 const { Helpers } = require("../../util/helpers/helpers");
+const axios = require('axios')
 
 
 class IndexFile {
@@ -58,17 +59,16 @@ class IndexFile {
           }
     }
 
-    uploadToS3 = async () => {
+    saveFormFile = async () => {
         try{
             if(this.file == null){
                 throw new Error(`File data not present for upload:  ${this.url}`)
             }
             //upload file
             const putS3Params = this.helpers.buildS3PutParams(Constants.BUCKETNAME, `${Constants.BUCKETKEY}/${this.fileName}`, this.file)
-                bucketName, s3Key, response.data);
             await this.awsClient.putS3HeadObjCMD(putS3Params);
 
-            console.log(`Successfully uploaded index file for ${year}, ${quarter} to S3.`);
+            console.log(`Successfully uploaded index file for ${this.year}, ${this.quarter} to S3.`);
 
         }
         catch(error){
