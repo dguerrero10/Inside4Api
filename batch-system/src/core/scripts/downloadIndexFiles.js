@@ -1,12 +1,17 @@
-const axios = require("axios");
-const { AWSClient } = require("../../util/AWSClient");
-const { Helpers } = require("../../util/helpers/helpers");
-const { Constants } = require("../../util/constants");
-const IndexFile = require("../models/IndexFile")
 
-module.exports = downloadIndexFiles = async (startYear = null, endYear = null) => {
-  const awsClient = AWSClient.getInstance();
-  const helpers = new Helpers();
+
+module.exports = downloadIndexFiles = async (startYear = null, endYear = null, isLocal = true) => {
+
+  let IndexFile;
+  const delay = 10000;
+
+  if(isLocal){
+    IndexFile = require("../models/IndexFileLocal")
+
+  }
+  else{
+    IndexFile = require("../models/IndexFile")
+  }
 
   //if no start year, start at current year
   if(startYear == null){
@@ -29,6 +34,7 @@ module.exports = downloadIndexFiles = async (startYear = null, endYear = null) =
   for(const year of years) {
     for (const quarter of quarters) {
       //create indexfile obj
+    
       const myIndexFile = new IndexFile(quarter, year)
 
       //check if exists
@@ -44,14 +50,19 @@ module.exports = downloadIndexFiles = async (startYear = null, endYear = null) =
       }
 
       //store file
-      await myIndexFile.uploadToS3()
+      await myIndexFile.saveFormFile()
 
       //save file url to DB
       await myIndexFile.saveURLtoDB(true)
 
       // Wait one-tenth of a second before proceeding to the next file.
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
 
 };
+
+console.log('starting download index files....')
+downloadIndexFiles()
+
+module.exports = downloadIndexFiles
