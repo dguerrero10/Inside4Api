@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing Node.js dependencies..."
+      - npm install -g serverless
+      - npm install
+
+  build:
+    commands:
+      - echo "Build phase..."
+      - serverless deploy --stage dev
+      
+artifacts:
+  files:
+    - '**/*'

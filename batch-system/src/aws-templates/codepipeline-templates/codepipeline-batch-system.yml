@@ -1,0 +1,96 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  GitHubRepoURL:
+    Type: String
+    Description: URL of the GitHub repository
+  GitHubBranch:
+    Type: String
+    Default: main
+    Description: GitHub branch to trigger the pipeline
+  ProjectName:
+    Type: String
+    Default: batch-system
+  PipelineRoleName:
+    Type: String
+    Default: code-deploy-iam
+  CodeBuildRoleName:
+    Type: String
+    Default: code-deploy-iam
+  Environment:
+    Type: String
+    Default: Development
+    AllowedValues:
+      - Development
+      - Test 
+      - Production
+  ArtifactStoreIdentifier:
+    Type: String
+    Default: artifacts
+  Branch:
+    Type: String
+    Default: development
+    AllowedValues:
+      - development
+      - test
+      - production
+  AWSAccountId:
+    Type: String
+    Default: '842652302289'
+    AllowedValues:
+      - '842652302289'
+Resources:
+  Pipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      Name: !Sub "${ProjectName}-pipeline"
+      RoleArn: arn:aws:iam::842652302289:role/code-deploy-iam
+      ArtifactStore:
+        Location: !Sub "${AWSAccountIdentifier}-${Environment}-${AWS::Region}-${ArtifactStoreIdentifier}"
+        Type: S3
+      Stages:
+        - Name: Checkout
+          Actions:
+            - Name: SourceAction
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Version: 1
+                Provider: GitHub
+              Configuration:
+                Owner: dguerrero10
+                Repo: Inside4Api
+                Branch: !Ref GitHubBranch
+                OAuthToken: {{resolve:ssm:/github/token}}
+                PollForSourceChanges: false
+              OutputArtifacts:
+                - Name: SourceArtifact
+              RunOrder: 1
+        - Name: Deploy
+          Actions:
+            - Name: BuildAction
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+              Configuration:
+                ProjectName: !Ref CodeBuildProject
+              InputArtifacts:
+                - Name: SourceArtifact
+              OutputArtifacts:
+                - Name: BuildArtifact
+  CodeBuildProject:
+    Type: AWS::CodeBuildArtifact::Project
+    Properties:
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/amazonlinux2-x86_64-standard:4.0
+        Type: LINUX_CONTAINER
+      Name: !Sub "${ProjectName}-build"
+      ServiceRole: !Sub "arn:aws:iam::${AWS::AccountId}:role/${CodeBuildRoleName}"
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: !Sub "aws-templates/build-templates/buildspec.yml"
+        TimeoutInMinutes: 15
