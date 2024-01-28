@@ -10,7 +10,7 @@ phases:
     commands:
       - echo "Build phase..."
       - ls 
-      - serverless deploy --stage dev
+      - serverless deploy --verbose -c serverless.yml --stage dev
       
 artifacts:
   files:
