@@ -20,7 +20,7 @@ class IndexFileLocal {
 
   //check if file exists in folder already
   //Returns: Boolean
-  checkFileExists = async () => {
+  checkIfFileExists = async () => {
     try {
       // Check if the file is already in local folder
       if (fs.existsSync(`${this.path}/${this.fileName}`)) {

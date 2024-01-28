@@ -13,10 +13,14 @@ module.exports = downloadIndexFiles = async (startYear = null, endYear = null, i
     startYear = new Date().getFullYear();
   }
 
+  console.log(`Start year: ${startYear}`);
+
   //if no end year, end 14 years in the past
   if (endYear == null) {
     endYear = new Date().getFullYear() - 14;
   }
+
+  console.log(`End year: ${endYear}`);
 
   // List of years to be searched.
   const years = Array.from(
@@ -36,30 +40,30 @@ module.exports = downloadIndexFiles = async (startYear = null, endYear = null, i
       const myIndexFile = new IndexFile(quarter, year);
 
       //check if exists
-      const doesExist = await myIndexFile.checkFileExists();
+      const doesExist = await myIndexFile.checkIfFileExists("index-files");
       if (doesExist) {
+        console.log(`Index File of: ${myIndexFile.year}-${myIndexFile.quarter} already exists. Skipping...`);
         continue;
       }
 
       //download file
       const downloadStatus = await myIndexFile.downloadFormFile();
       if (downloadStatus !== 0) {
-        await myIndexFile.saveURLtoDB(false, "Failed to download S3 file");
+        console.log(`Failed to download Index File: ${myIndexFile.year}-${myIndexFile.quarter}`);
+        // await myIndexFile.saveURLtoDB(false, "Failed to download S3 file");
       }
 
+      console.log(`Successfully downloaded Index File: ${myIndexFile.year}-${myIndexFile.quarter}`);
+
       //store file
-      await myIndexFile.saveFormFile();
+      await myIndexFile.saveFormFile("index-files");
 
       //save file url to DB
-      await myIndexFile.saveURLtoDB(true);
+      // await myIndexFile.saveURLtoDB(true);
 
       // Wait one-tenth of a second before proceeding to the next file.
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
 };
-
-console.log("starting download index files....");
-downloadIndexFiles();
-
 module.exports = downloadIndexFiles;

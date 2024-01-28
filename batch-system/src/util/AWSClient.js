@@ -15,11 +15,10 @@ const { Constants } = require("./constants");
 module.exports = {
   AWSClient: class AWSClient {
     constructor() {
-      this.credentials = Constants.AWS_CREDS;
-      this.s3Client = new S3Client(this.credentials);
-      this.dynamoDBClient = new DynamoDBClient(this.credentials);
-      this.sqsClient = new SQSClient(this.credentials);
-      this.snsClient = new SNSClient(this.credentials);
+      this.s3Client = new S3Client();
+      this.dynamoDBClient = new DynamoDBClient();
+      this.sqsClient = new SQSClient();
+      this.snsClient = new SNSClient();
       this.helpers = new Helpers();
     }
 

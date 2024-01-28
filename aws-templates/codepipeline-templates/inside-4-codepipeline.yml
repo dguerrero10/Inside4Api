@@ -1,15 +1,8 @@
 AWSTemplateFormatVersion: 2010-09-09
 Parameters:
-  GitHubRepoURL:
-    Type: String
-    Description: URL of the GitHub repository
-  GitHubBranch:
-    Type: String
-    Default: main
-    Description: GitHub branch to trigger the pipeline
   ProjectName:
     Type: String
-    Default: batch-system
+    Default: inside-four
   PipelineRoleName:
     Type: String
     Default: code-deploy-iam
@@ -30,6 +23,7 @@ Parameters:
     Type: String
     Default: development
     AllowedValues:
+      - oop-batch
       - development
       - test
       - production
@@ -38,6 +32,10 @@ Parameters:
     Default: '842652302289'
     AllowedValues:
       - '842652302289'
+  AWSAccountIdentifier:
+    Type: String
+    Default: Inside4
+
 Resources:
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
@@ -59,8 +57,8 @@ Resources:
               Configuration:
                 Owner: dguerrero10
                 Repo: Inside4Api
-                Branch: !Ref GitHubBranch
-                OAuthToken: {{resolve:ssm:/github/token}}
+                Branch: !Ref Branch
+                OAuthToken: !Sub "{{resolve:ssm:/github/token}}"
                 PollForSourceChanges: false
               OutputArtifacts:
                 - Name: SourceArtifact

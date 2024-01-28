@@ -10,7 +10,7 @@ module.exports = {
       DYNAMO_DB_AUDIT_TABLE_NAME: "",
       STAGES: {"1": "Downloading Index Files", "2": "Parsing Index Files to CSV"},
       STATUS: {"1": "SUCCEEDED", "2": "FAILED"},
-      BUCKETNAME:"" ,
+      BUCKETNAME:"inside-4-apps" ,
       BUCKETKEY: ""
     },
   };

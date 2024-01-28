@@ -11,6 +11,6 @@ module.exports = parseExtractFormIndexes = async (indexFile) => {
     console.log(formFile);
   } catch (error) {
     console.error(error);
-    await indexFileParser.saveStateToDB(false, "Error parsing form file");
+    await indexFileParser.saveStateToDB(false, "Error parsing form file.");
   }
 };

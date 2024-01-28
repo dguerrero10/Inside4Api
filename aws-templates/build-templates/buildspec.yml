@@ -6,7 +6,6 @@ phases:
       - echo "Installing Node.js dependencies..."
       - npm install -g serverless
       - npm install
-
   build:
     commands:
       - echo "Build phase..."

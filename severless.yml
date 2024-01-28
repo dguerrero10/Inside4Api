@@ -10,14 +10,6 @@ provider:
 functions:
   batchSystem:
     handler: index.index
-    events:
-      - http:
-          path: batch-system
-          method: POST
-          authorizer:
-            type: COGNITO_USER_POOLS
-            authorizerId:
-              Ref: CognitoAuthorizer
     role: arn:aws:iam::842652302289:role/lambda-iam
 
 resources:

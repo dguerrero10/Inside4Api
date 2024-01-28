@@ -18,12 +18,12 @@ class IndexFile {
 
   //check if file exists in S3 already
   //Returns: Boolean
-  checkFileExists = async () => {
+  checkIfFileExists = async (prefix) => {
     try {
       // Check if the file is already in S3
       const headS3Params = this.helpers.buildS3HeadParams(
         Constants.BUCKETNAME,
-        `${Constants.BUCKETKEY}/${this.fileName}`
+        `${prefix}/${this.fileName}`
       );
       await this.awsClient.headS3ObjectCMD(headS3Params);
       console.log(
@@ -70,7 +70,7 @@ class IndexFile {
     }
   };
 
-  saveFormFile = async () => {
+  saveFormFile = async (prefix) => {
     try {
       if (this.file == null) {
         throw new Error(`File data not present for upload:  ${this.url}`);
@@ -78,7 +78,7 @@ class IndexFile {
       //upload file
       const putS3Params = this.helpers.buildS3PutParams(
         Constants.BUCKETNAME,
-        `${Constants.BUCKETKEY}/${this.fileName}`,
+        `${prefix}/${this.fileName}`,
         this.file
       );
       await this.awsClient.putS3HeadObjCMD(putS3Params);
