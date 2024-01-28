@@ -36,6 +36,21 @@ Parameters:
     Type: String
     Default: Inside4
 
+Metadata:
+  'AWS::CloudFormation::Interface':
+    ParameterGroups:
+      - Label:
+          default: CodePipeline Settings
+        Parameters:
+          - ProjectName
+          - Environment
+          - AWSAccountId
+          - AWSCodeBuildProject
+      - Label:
+          default: GitHub Settings
+        Parameters:
+          - Branch
+
 Resources:
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
@@ -78,7 +93,7 @@ Resources:
               OutputArtifacts:
                 - Name: BuildArtifact
   CodeBuildProject:
-    Type: AWS::CodeBuildArtifact::Project
+    Type: AWS::CodeBuild::Project
     Properties:
       Artifacts:
         Type: CODEPIPELINE
